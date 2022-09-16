@@ -6,8 +6,8 @@ import './Nav.css'
 const Nav = () => {
     return (
         <div className='nav_container'>
-            <a href='/'><BiHome /></a>
-            <a href='/dashboard'><MdSpaceDashboard /></a>
+            <a href='https://dgconstruction.herokuapp.com/'><BiHome /></a>
+            <a href='https://dgconstruction.herokuapp.com/dashboard'><MdSpaceDashboard /></a>
             <a href='/report/pdfReport'><BiReceipt /></a>
             <a href='/report/allprojectbudgetplot'><BiLineChart /></a>
         </div>

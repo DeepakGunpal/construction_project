@@ -3,13 +3,13 @@ const { createPDF, createProject, dashboard, fetchPDF, projectDetail } = require
 const { createSupplier } = require('../controller/supplier.js');
 const route = express.Router();
 
-route.post('/api/createProject', createProject);
-route.get('/api/dashboard', dashboard);
-route.get('/api/projectDetails/:projectId', projectDetail);
+route.post('/createProject', createProject);
+route.get('/dashboard', dashboard);
+route.get('/projectDetails/:projectId', projectDetail);
 
-route.post('/api/createSupplier', createSupplier);
+route.post('/createSupplier', createSupplier);
 
-route.get('/api/create-pdf', createPDF);
-route.get('/api/fetch-pdf', fetchPDF);
+route.get('/create-pdf', createPDF);
+route.get('/fetch-pdf', fetchPDF);
 
 module.exports = route;

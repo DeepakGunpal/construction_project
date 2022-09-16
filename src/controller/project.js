@@ -2,6 +2,7 @@ const project = require("../model/project.js");
 const projectId = require("../model/projectId.js");
 const puppeteer = require("puppeteer");
 const fs = require("fs-extra");
+const pdf = require('html-pdf');
 const hbs = require("handlebars");
 const path = require('path');
 
@@ -76,24 +77,20 @@ const compile = async (templateName, details) => {
 //todo createPdf and store on the server
 const createPDF = async (req, res) => {
     try {
-
         const projects = await project.find().select('projectId projectName budget');
         const details = JSON.parse(JSON.stringify(projects)); //todo deep copy (handlebars error resolved)
 
-        const browser = await puppeteer.launch({ ignoreDefaultArgs: ['--disable-extensions'] });
-        const page = await browser.newPage();
-
         const content = await compile('index', { details });
+        console.log(content);
+        pdf.create(content, {}).toFile('./src/pdf/allProjectBudgetReport.pdf', (err) => {
+            if (err) {
+                res.send(Promise.reject());
+            }
 
-        await page.setContent(content);
-        await page.pdf({
-            path: './src/pdf/allProjectBudgetReport.pdf',
-            format: 'A4'
+            console.log('pdf generated');
+            res.send(Promise.resolve());
         });
 
-        console.log('pdf generated');
-
-        res.status(200).send({ data: details });
     } catch (error) {
         console.log(error);
         res.status(500).send({ message: error.message });

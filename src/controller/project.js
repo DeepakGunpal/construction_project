@@ -83,14 +83,14 @@ const createPDF = async (req, res) => {
         pdf.create(content, {}).toFile('./src/pdf/allProjectBudgetReport.pdf', (err) => {
             if (err) {
                 Promise.reject('pdf generation failed').catch((error) => res.send({ message: error }))
-                return res.send({ message: err });
+            } else {
+                console.log('pdf generated');
+                Promise.resolve()
+                    .then(() =>
+                        res.send({ message: 'pdf generated' })
+                    )
             }
 
-            console.log('pdf generated');
-            Promise.resolve()
-                .then(() =>
-                    res.send({ message: 'pdf generated' })
-                )
         });
 
     } catch (error) {

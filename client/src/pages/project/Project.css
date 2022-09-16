@@ -1,0 +1,74 @@
+.details{
+    width: 90vw;
+    height: fit-content;
+    background-color: rgba(134, 133, 119, 0.851);
+    border-radius: 8px;
+    margin: 6.5% 6.5%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    padding: 2% 1%;
+    gap: 2.5rem;
+}
+
+.details_container{
+    background-color: #151414;
+    color: rgb(243, 237, 237);
+    border-radius: 14px;
+    font-size: larger;
+    text-decoration: none;
+}
+
+.details_container p{
+    margin-left: 5%;
+}
+
+.add_supplier{
+    background-color: #151414;
+    color: rgb(243, 237, 237);
+    border-radius: 14px;
+    font-size: larger;    
+    padding: 0 5% 5% 5%;
+}
+
+.add_supplier_button_container{    
+    position: absolute;
+    right: 3%;
+    top: 4%;
+}
+
+/* ==========Media  Queries (medium devices) =============*/
+
+@media screen and (max-width: 1024px) {
+    .details{
+     grid-template-columns: repeat(2, 1fr);
+     grid-template-rows: repeat(2, 1fr);
+     margin: 2% 1% 0% 2%;
+    }   
+
+    .add_supplier_button_container{    
+        position: static;
+        display: flex;
+        justify-content: center;
+        margin: 1%;
+    }
+ }
+ 
+ /* ==========Media  Queries (small devices) =============*/
+ 
+ @media screen and (max-width: 600px) {
+     .details{
+         grid-template-columns: repeat(1, 1fr);
+         grid-template-rows: repeat(1, 1fr);
+         padding: 2% 3%;
+         margin-top: 2%;
+         gap: 1rem;
+     }
+
+     .add_supplier_button_container{    
+        position: static;
+        margin: 4% 22%;
+    }
+ 
+ 
+ }

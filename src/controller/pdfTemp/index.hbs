@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details</title>
+    <link rel="stylesheet" href="./template.css">
+    <style>
+        body{
+    display: flex;
+    justify-content: center;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 90%;
+}
+
+table{
+    border-top: 2px solid blue;
+    width: 90%;
+    font-size: large;  
+}
+
+table thead tr{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+table tbody tr{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h1>Project Details</h1>
+    <table >
+        <thead>
+            <tr>
+                <th>ProjectId</th>
+                <th>Project Name</th>
+                <th>Budget (in &#8377 Crore)</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each details}}
+                <tr>
+                    <td>{{projectId}}</td>
+                    <td>{{projectName}}</td>
+                    <td>{{budget}}</td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

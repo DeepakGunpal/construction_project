@@ -1,0 +1,52 @@
+.home{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(17, 17, 18);
+    color: rgb(241, 238, 232);
+    font-size: xx-large;
+}
+
+.home button{
+    width: fit-content;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 6px;
+}
+
+.home button:hover{
+    font-size: 18.5px;
+    font-weight: bolder;
+}
+
+.nav_on_home{
+    margin-left: 1%;
+}
+
+
+/* ==========Media  Queries (medium devices) =============*/
+
+@media screen and (max-width: 1024px) {
+    .home{
+        font-size: larger;
+    }
+    .nav_on_home{
+        position: absolute;
+        background-color: wheat;
+        width: 95%;
+        top: 2%;
+        margin: 1%;
+        padding: 1%;
+    }
+}
+
+/* ==========Media  Queries (small devices) =============*/
+
+@media screen and (max-width: 600px) {
+
+}

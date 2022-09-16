@@ -1,0 +1,29 @@
+body{
+    display: flex;
+    justify-content: center;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 90%;
+}
+
+table{
+    border-top: 2px solid blue;
+    width: 90%;
+    font-size: large;  
+}
+
+table thead tr{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+table tbody tr{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}

@@ -11,11 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/', route);
 
-const corsOptions = {
-    origin: 'https://fastidious-gecko-3045db.netlify.app/',
-    credentials: true,
-};
-app.use(cors(corsOptions));
+app.use(cors());
 
 const PORT = process.env.PORT || 5000;
 

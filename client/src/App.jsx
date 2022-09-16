@@ -10,8 +10,8 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path='https://dgconstruction.herokuapp.com/dashboard' element={<Home />} />
-        <Route path='https://dgconstruction.herokuapp.com/dashboard' element={<Dashboard />} />
+        <Route exact path='/' element={<Home />} />
+        <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/project' element={<Project />} >
           <Route path=':projectId' element={<Project />} />
         </Route>

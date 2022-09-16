@@ -12,7 +12,7 @@ const PdfReport = () => {
     }
 
     const createAndDownloadPdf = async () => {
-        await axiosInstance.get('/create-pdf');
+        // await axiosInstance.get('/create-pdf');
         const res = await axiosInstance.get('/fetch-pdf', { responseType: 'blob' })
         const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
         saveAs(pdfBlob, 'report.pdf');

@@ -55,9 +55,9 @@ export default function AddProject() {
 
   const validate = (e) => {
     if (e.target.name === 'siteAddress') {
-      e.target.value = e.target.value.replace(/[^a-zA-Z0-9@]/g, '');
+      e.target.value = e.target.value.replace(/[^a-zA-Z0-9@ ]/g, '');
     } else {
-      e.target.value = e.target.value.replace(/[^a-zA-Z]/g, '');
+      e.target.value = e.target.value.replace(/[^a-zA-Z ]/g, '');
     }
   };
 

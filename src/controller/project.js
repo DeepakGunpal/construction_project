@@ -80,14 +80,14 @@ const createPDF = async (req, res) => {
         const projects = await project.find().select('projectId projectName budget');
         const details = JSON.parse(JSON.stringify(projects)); //todo deep copy (handlebars error resolved)
 
-        const browser = await puppeteer.launch();
+        const browser = await puppeteer.launch({ ignoreDefaultArgs: ['--disable-extensions'] });
         const page = await browser.newPage();
 
         const content = await compile('index', { details });
 
         await page.setContent(content);
         await page.pdf({
-            path: './pdfReport.pdf',
+            path: './src/pdf/allProjectBudgetReport.pdf',
             format: 'A4'
         });
 
@@ -103,7 +103,7 @@ const createPDF = async (req, res) => {
 //todo fetchpdf
 const fetchPDF = async (req, res) => {
     try {
-        res.sendFile(`${process.cwd()}/pdfReport.pdf`)
+        res.sendFile(`${process.cwd()}/src/pdf/allProjectBudgetReport.pdf`)
     } catch (error) {
         console.log("getpdf", error);
         res.status(500).send({ message: error.message });

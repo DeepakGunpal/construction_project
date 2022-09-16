@@ -15,7 +15,7 @@ const PdfReport = () => {
         await axiosInstance.get('/create-pdf');
         const res = await axiosInstance.get('/fetch-pdf', { responseType: 'blob' })
         const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
-        saveAs(pdfBlob, 'pdfReport.pdf');
+        saveAs(pdfBlob, 'report.pdf');
     }
 
     useEffect(() => {
@@ -41,9 +41,10 @@ const PdfReport = () => {
                             <th>Budget (in ₹ Crore)</th>
                         </tr>
                     </thead>
+                    <hr/>
                     {
                         details.map((detail) => {
-                            return <tbody>
+                            return  <tbody>
                                 <tr>
                                     <td>{detail.projectId}</td>
                                     <td>{detail.projectName}</td>

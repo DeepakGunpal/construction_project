@@ -32,7 +32,7 @@ const AddSupplier = ({ setSupp }) => {
     };
 
     const validate = (e) => {
-        e.target.value = e.target.value.replace(/[^a-zA-Z]+/, '');
+        e.target.value = e.target.value.replace(/[^a-zA-Z ]+/, '');
     };
 
     const handleInput = ({ target: { name, value } }) => {

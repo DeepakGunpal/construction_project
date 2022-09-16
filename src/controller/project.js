@@ -81,13 +81,15 @@ const createPDF = async (req, res) => {
 
         const content = await compile('index', { details });
         console.log(content);
-        pdf.create(content, {}).toFile('./src/pdf/allProjectBudgetReport.pdf', (err) => {
+        pdf.create(content, {}).toFile('./src/pdf/allProjectBudgetReport.pdf', async (err) => {
             if (err) {
-                return res.send(Promise.reject());
+                await Promise.reject()
+                return res.send({ message: err });
             }
 
             console.log('pdf generated');
-            return res.send(Promise.resolve());
+            await Promise.resolve()
+            return res.send({ message: 'pdf generated' });
         });
 
     } catch (error) {

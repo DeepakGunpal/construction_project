@@ -96,7 +96,7 @@ const createPDF = async (req, res) => {
         res.status(200).send({ data: details });
     } catch (error) {
         console.log(error);
-        res.status(500).send({ message: { e: error.message, e: error } });
+        res.status(500).send({ message: error.message });
     }
 }
 

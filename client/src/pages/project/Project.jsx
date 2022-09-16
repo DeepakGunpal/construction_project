@@ -53,7 +53,7 @@ const Project = () => {
                 {
                     supp && <div
                         className='add_supplier'
-                    ><AddSupplier /></div>
+                    ><AddSupplier setSupp={setSupp} /></div>
                 }
 
                 <div className='details_container'>
@@ -94,7 +94,7 @@ const Project = () => {
                     {
                         update && <div
                             className='add_supplier'
-                        ><ProjectStatus /></div>
+                        ><ProjectStatus setUpdate={setUpdate} /></div>
                     }
                 </div>
                 {details && details.supplier &&

@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { axiosInstance } from '../../config';
 
-const AddSupplier = () => {
+const AddSupplier = ({ setSupp }) => {
 
     var { projectId } = useParams();
     const [newSupplierDetails, setNewSupplierDetails] = useState({
@@ -28,6 +28,11 @@ const AddSupplier = () => {
         console.log('handleAdd', newSupplierData);
         newSupplier(newSupplierData);
         setNewSupplierDetails("");
+        setSupp(false);
+    };
+
+    const validate = (e) => {
+        e.target.value = e.target.value.replace(/[^a-zA-Z]+/, '');
     };
 
     const handleInput = ({ target: { name, value } }) => {
@@ -53,24 +58,32 @@ const AddSupplier = () => {
                     onChange={handleInput}
                     label="Supplier Name"
                     name="supplierName"
+                    type='text'
+                    onKeyUp={(e) => validate(e)}
+
                 />
                 <TextField
                     className="search"
                     onChange={handleInput}
                     label="Supplier Type"
                     name="supplierType"
+                    type='text'
+                    onKeyUp={(e) => validate(e)}
+
                 />
                 <TextField
                     className="search"
                     onChange={handleInput}
                     label="Supplier Phone"
                     name="supplierPhone"
+                    type="number"
                 />
                 <TextField
                     className="search"
                     onChange={handleInput}
                     label="Supplier Email"
                     name="supplierEmail"
+                    type="email"
                 />
                 <br />
                 <Button

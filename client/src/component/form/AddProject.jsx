@@ -51,9 +51,15 @@ export default function AddProject() {
 
   const handleInput = ({ target: { name, value } }) => {
     setNewProjectDetails({ ...newProjectDetails, [name]: value })
-  }
+  };
 
-
+  const validate = (e) => {
+    if (e.target.name === 'siteAddress') {
+      e.target.value = e.target.value.replace(/[^a-zA-Z0-9@]/g, '');
+    } else {
+      e.target.value = e.target.value.replace(/[^a-zA-Z]/g, '');
+    }
+  };
 
   return (
     <div className='create_new_project_button'>
@@ -76,9 +82,8 @@ export default function AddProject() {
             style={{ fontSize: '18px', fontWeight: 'bold' }}
           >
             Important : <br />
-            1.) * mandatory fields. <br />
-            2.) Project Name and Project Manager Name is mandatory <br />
-            3.) Supplier Phone should be of 10 digit without 0 & country code
+            1.) Project Name and Project Manager Name is mandatory <br />
+            2.) Supplier Phone should be of 10 digit without 0 & country code
           </DialogContentText>
           <br />
           <div style={{ display: 'flex', justifyContent: 'space-around', gap: '2rem' }}>
@@ -88,6 +93,8 @@ export default function AddProject() {
               label="Project Name"
               name="projectName"
               required
+              type='text'
+              onKeyUp={(e) => validate(e)}
             />
             <TextField
               className="search"
@@ -95,6 +102,8 @@ export default function AddProject() {
               label="Project Manager"
               name="projectManager"
               required
+              type='text'
+              onKeyUp={(e) => validate(e)}
             />
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.1rem', fontSize: 'large' }}>
@@ -137,7 +146,6 @@ export default function AddProject() {
           <TextField
             autoFocus
             margin="dense"
-            id="name"
             onChange={handleInput}
             label="Project Status"
             name="projectStatus"
@@ -145,18 +153,19 @@ export default function AddProject() {
             fullWidth
             variant="standard"
             autoComplete='off'
+            onKeyUp={(e) => validate(e)}
           />
           <TextField
             autoFocus
             margin="dense"
-            id="name"
             onChange={handleInput}
             label="Site Address"
             name="siteAddress"
-            type="text"
             fullWidth
             variant="standard"
             autoComplete='off'
+            type='text'
+            onKeyUp={(e) => validate(e)}
           />
           <div style={{ fontSize: 'large' }}>
             <p>Add Supplier</p>
@@ -166,24 +175,30 @@ export default function AddProject() {
                 onChange={handleInput}
                 label="Supplier Name"
                 name="supplierName"
+                type='text'
+                onKeyUp={(e) => validate(e)}
               />
               <TextField
                 className="search"
                 onChange={handleInput}
                 label="Supplier Type"
                 name="supplierType"
+                type='text'
+                onKeyUp={(e) => validate(e)}
               />
               <TextField
                 className="search"
                 onChange={handleInput}
                 label="Supplier Phone"
                 name="supplierPhone"
+                type='number'
               />
               <TextField
                 className="search"
                 onChange={handleInput}
                 label="Supplier Email"
                 name="supplierEmail"
+                type='email'
               />
             </div>
           </div>

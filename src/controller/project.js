@@ -59,6 +59,7 @@ const projectDetail = async (req, res) => {
     try {
         const projectId = req.params.projectId;
         const completeProject = await project.findOne({ projectId: projectId })
+        console.log('projectFetched');
         res.status(200).send({ message: 'Project details', data: completeProject });
     } catch (error) {
         res.status(500).send({ message: error });
@@ -85,13 +86,12 @@ const createPDF = async (req, res) => {
         const content = await compile('index', { details });
 
         await page.setContent(content);
-
         await page.pdf({
-            path: 'pdfReport.pdf',
+            path: './pdfReport.pdf',
             format: 'A4'
         });
 
-        console.log('pdf created');
+        console.log('pdf generated');
 
         res.status(200).send({ data: details });
     } catch (error) {

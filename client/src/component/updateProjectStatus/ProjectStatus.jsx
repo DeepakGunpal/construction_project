@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { axiosInstance } from '../../config';
 
-const ProjectStatus = () => {
+const ProjectStatus = ({ setUpdate }) => {
 
     var { projectId } = useParams();
     const [newProjectStatus, setNewProjectStatus] = useState({
@@ -14,8 +14,10 @@ const ProjectStatus = () => {
     });
 
     const updateStatus = async (data) => {
-        const res = axiosInstance.post('/createSupplier', data)
+        const res = await axiosInstance.post('/createSupplier', data)
         console.log(res)
+        if (res.status === 201) window.alert("Status updated")
+        else window.alert("Invalid Data")
     };
 
     const handleAdd = () => {
@@ -23,6 +25,11 @@ const ProjectStatus = () => {
         console.log('handleAdd', updatedStatus);
         updateStatus(updatedStatus);
         setNewProjectStatus("");
+        setUpdate(false);
+    };
+
+    const validate = (e) => {
+        e.target.value = e.target.value.replace(/[^a-zA-Z]+/, '');
     };
 
     const handleInput = ({ target: { name, value } }) => {
@@ -31,7 +38,6 @@ const ProjectStatus = () => {
 
     return (
         <div style={{ fontSize: 'large' }}>
-            <br />
             <hr />
             <div style={{
                 display: 'flex',
@@ -47,6 +53,9 @@ const ProjectStatus = () => {
                     onChange={handleInput}
                     label="Project Status"
                     name="projectStatus"
+                    id='input-field'
+                    onKeyUp={(e) => validate(e)}
+                    type='text'
                 />
                 <Button
                     variant="contained"

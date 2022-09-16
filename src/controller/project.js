@@ -1,6 +1,5 @@
 const project = require("../model/project.js");
 const projectId = require("../model/projectId.js");
-const puppeteer = require("puppeteer");
 const fs = require("fs-extra");
 const pdf = require('html-pdf');
 const hbs = require("handlebars");
@@ -84,11 +83,11 @@ const createPDF = async (req, res) => {
         console.log(content);
         pdf.create(content, {}).toFile('./src/pdf/allProjectBudgetReport.pdf', (err) => {
             if (err) {
-                res.send(Promise.reject());
+                return res.send(Promise.reject());
             }
 
             console.log('pdf generated');
-            res.send(Promise.resolve());
+            return res.send(Promise.resolve());
         });
 
     } catch (error) {

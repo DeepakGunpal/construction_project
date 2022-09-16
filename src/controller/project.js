@@ -80,14 +80,17 @@ const createPDF = async (req, res) => {
         const details = JSON.parse(JSON.stringify(projects)); //todo deep copy (handlebars error resolved)
 
         const content = await compile('index', { details });
-        console.log(content);
-        pdf.create(content, {}).toFile('./src/pdf/allProjectBudgetReport.pdf',  (err) => {
+        pdf.create(content, {}).toFile('./src/pdf/allProjectBudgetReport.pdf', (err) => {
             if (err) {
+                Promise.reject('pdf generation failed').catch((error) => res.send({ message: error }))
                 return res.send({ message: err });
             }
 
             console.log('pdf generated');
-            return res.send({ message: 'pdf generated' });
+            Promise.resolve()
+                .then(() =>
+                    res.send({ message: 'pdf generated' })
+                )
         });
 
     } catch (error) {

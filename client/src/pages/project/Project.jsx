@@ -16,7 +16,6 @@ const Project = () => {
     var { projectId } = useParams();
 
     const projectDetails = async (id1) => {
-
         const projectDetails = await axiosInstance.get(`/projectDetails/${id1}`);
         setDetails(projectDetails.data.data);
     }

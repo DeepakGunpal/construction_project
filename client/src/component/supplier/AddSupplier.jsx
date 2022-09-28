@@ -17,10 +17,10 @@ const AddSupplier = ({ setSupp }) => {
     });
 
     const newSupplier = async (data) => {
-        const res = await axiosInstance.post('/createSupplier', data)
-        console.log(res)
+        const res = await axiosInstance.post('/createSupplier', data).catch((err) => {
+            window.alert(Object.values(err.response.data.message)[0])
+        })
         if (res.status === 201) window.alert("Supplier Added")
-        else window.alert("Invalid Data")
     };
 
     const handleAdd = () => {
@@ -60,6 +60,7 @@ const AddSupplier = ({ setSupp }) => {
                     name="supplierName"
                     type='text'
                     onKeyUp={(e) => validate(e)}
+                    required
 
                 />
                 <TextField

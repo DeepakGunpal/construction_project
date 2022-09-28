@@ -1,4 +1,5 @@
 const project = require("../model/project");
+const { handleErrors } = require("./project");
 
 //todo create new supplier
 const createSupplier = async (req, res) => {
@@ -8,8 +9,7 @@ const createSupplier = async (req, res) => {
         if (req.body.supplierName) {
             console.log('update supplier')
             updates = { $addToSet: { supplier: { supplierName, supplierType, supplierPhone, supplierEmail } } }
-        }
-        if (req.body.projectStatus) {
+        } else if (req.body.projectStatus) {
             console.log('update status')
             updates = { $addToSet: { projectStatus } }
         } else {
@@ -19,8 +19,8 @@ const createSupplier = async (req, res) => {
         const newSupp = await project.findOneAndUpdate({ projectId: req.body.projectId }, updates, { new: true })
         res.status(201).send({ message: 'supplier created', data: newSupp });
     } catch (error) {
-        console.log(error.message)
-        res.status(500).send({ message: error.message });
+        const err = handleErrors(error);
+        res.status(400).send({ message: err });
     }
 }
 

@@ -32,9 +32,11 @@ export default function AddProject() {
   };
 
   const newProject = async (data) => {
-    const res = await axiosInstance.post('/createProject', data)
+    const res = await axiosInstance.post('/createProject', data).catch((err) => {
+      console.log(Object.values(err.response.data.message)[0])
+      window.alert(Object.values(err.response.data.message)[0])
+    })
     if (res.status === 201) window.alert("Project Created")
-    else window.alert("Invalid Data")
   }
 
   const handleAdd = () => {
@@ -82,10 +84,10 @@ export default function AddProject() {
             style={{ fontSize: '18px', fontWeight: 'bold' }}
           >
             Important : <br />
-            1.) Project Name and Project Manager Name is mandatory <br />
-            2.) Supplier Phone should be of 10 digit without 0 & country code
+            1.) Project Name and Project Manager Name is mandatory. <br />
+            2.) Supplier Phone should be of 10 digit without 0 & country code. <br />
+            3.) Supplier Email is mandatory and must be unique. <br /><hr />
           </DialogContentText>
-          <br />
           <div style={{ display: 'flex', justifyContent: 'space-around', gap: '2rem' }}>
             <TextField
               className="search"

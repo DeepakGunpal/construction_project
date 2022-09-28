@@ -3,8 +3,8 @@ const { isEmail } = require('validator');
 
 const projectSchema = new mongoose.Schema({
     projectId: { type: Number, required: true },
-    projectName: { type: String, required: true },
-    projectManager: { type: String, required: true },
+    projectName: { type: String, required: [true, 'Project Name is required.'] },
+    projectManager: { type: String, required: [true, 'Project Manager Name is required.'] },
     budget: Number,
     endDate: String,
     startDate: String,
@@ -15,13 +15,15 @@ const projectSchema = new mongoose.Schema({
         supplierType: String,
         supplierPhone: {
             type: Number,
-            minlength: [6, 'Minimum password length is 6 characters']
+            minlength: [10, 'Minimum phone length is 10 characters'],
+            unique: true
         },
         supplierEmail: {
             type: String,
-            unique: true,
+            required: [true, 'supplier email is required.'],
+            validate: [isEmail, 'Please enter a valid email'],
             lowercase: true,
-            validate: [isEmail, 'Please enter a valid email']
+            unique: true
         },
         _id: false
     }]

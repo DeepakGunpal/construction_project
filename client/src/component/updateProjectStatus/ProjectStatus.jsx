@@ -14,10 +14,10 @@ const ProjectStatus = ({ setUpdate }) => {
     });
 
     const updateStatus = async (data) => {
-        const res = await axiosInstance.post('/createSupplier', data)
-        console.log(res)
+        const res = await axiosInstance.post('/createSupplier', data).catch((err) => {
+            window.alert(Object.values(err.response.data.message)[0])
+        })
         if (res.status === 201) window.alert("Status updated")
-        else window.alert("Invalid Data")
     };
 
     const handleAdd = () => {

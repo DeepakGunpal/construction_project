@@ -1,6 +1,7 @@
 import React from 'react';
 import './Home.css';
 import Nav from '../../component/nav/Nav';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
     return (
@@ -11,7 +12,7 @@ const Home = () => {
             <div className='home'>
                 <h1>Welcome To Bhumio</h1>
                 <h2>Manage Your Construction Project Hassle-free!</h2>
-                <a href='/dashboard'><button>Go To Dashboard</button></a>
+                <Link to='/dashboard'><button>Go To Dashboard</button></Link>
             </div>
         </div>
     )

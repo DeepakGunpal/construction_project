@@ -5,10 +5,44 @@ const fs = require("fs-extra");
 const hbs = require("handlebars");
 const path = require('path');
 
+//?----------------------------- error handler ----------------------------
+
+const handleErrors = (err) => {
+    let errors = {};
+
+    // incorrect email
+    if (err.message === 'Provide input') {
+        errors.addSupplier = 'Provide input';
+    }
+    // incorrect email
+    if (err.message === 'Please enter a valid email') {
+        errors.email = 'Please enter a valid supplier email';
+    }
+
+    // incorrect password
+    if (err.message === 'Minimum phone length is 10 characters') {
+        errors.phone = 'Minimum phone length is 10 characters';
+    }
+
+    // duplicate email error
+    if (err.code === 11000) {
+        errors[`supplier email`] = `supplier email is already registered`;
+        return errors;
+    }
+
+    // validation errors
+    if (err.message.includes('project validation failed')) {
+        Object.values(err.errors).forEach(({ properties }) => {
+            errors[properties.path] = properties.message;
+        });
+    }
+
+    return errors;
+}
+
 //todo create new project
 const createProject = async (req, res) => {
     try {
-        console.log(req.body)
         const projId = await projectId.findOneAndUpdate({ id: '2234000' }, { $inc: { seq: 1 } }, { new: true });
         if (projId) {
             req.body.projectId = projId.seq;
@@ -23,23 +57,23 @@ const createProject = async (req, res) => {
             projectManager: req.body.projectManager,
             startDate: req.body.startDate,
             endDate: req.body.endDate,
-            budget: parseInt(req.body.budget),
+            budget: parseInt(req.body.budget) ? parseInt(req.body.budget) : 0,
             siteAddress: req.body.siteAddress,
             projectStatus: req.body.projectStatus,
             supplier: {
                 supplierName: req.body.supplierName,
                 supplierType: req.body.supplierType,
-                supplierPhone: parseInt(req.body.supplierPhone),
+                supplierPhone: parseInt(req.body.supplierPhone) ? parseInt(req.body.supplierPhone) : 0,
                 supplierEmail: req.body.supplierEmail,
             }
         }
-
         const newProject = await project.create(data);
+        console.log('project created');
         res.status(201).send({ message: 'project Created', data: newProject });
 
     } catch (error) {
-        console.log(error.message)
-        res.status(500).send({ message: error.message });
+        const err = handleErrors(error);
+        res.status(400).send({ message: err });
     }
 }
 
@@ -49,7 +83,7 @@ const dashboard = async (req, res) => {
         const allProjects = await project.find().select('projectId projectName budget endDate');
         res.status(200).send({ message: 'All projects', data: allProjects });
     } catch (error) {
-        res.status(500).send({ message: error.message });
+        res.status(400).send({ message: error.message });
     }
 }
 
@@ -62,7 +96,7 @@ const projectDetail = async (req, res) => {
         console.log('projectFetched');
         res.status(200).send({ message: 'Project details', data: completeProject });
     } catch (error) {
-        res.status(500).send({ message: error });
+        res.status(400).send({ message: error });
     }
 }
 
@@ -96,7 +130,7 @@ const createPDF = async (req, res) => {
         res.status(200).send({ data: details });
     } catch (error) {
         console.log(error);
-        res.status(500).send({ message: error.message });
+        res.status(400).send({ message: error.message });
     }
 }
 
@@ -106,8 +140,8 @@ const fetchPDF = async (req, res) => {
         res.sendFile(`${process.cwd()}/src/pdf/allProjectBudgetReport.pdf`)
     } catch (error) {
         console.log("getpdf", error);
-        res.status(500).send({ message: error.message });
+        res.status(400).send({ message: error.message });
     }
 }
 
-module.exports = { createProject, dashboard, projectDetail, createPDF, fetchPDF };
+module.exports = { createProject, dashboard, projectDetail, createPDF, fetchPDF, handleErrors };

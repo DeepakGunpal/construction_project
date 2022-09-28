@@ -25,7 +25,7 @@ if (process.env.NODE_ENV == "production") {
 }
 
 
-mongoose.connect("mongodb+srv://DeepakGunpal:hdg5NWwcvf2wUDTN@deepakcluster0.hynna.mongodb.net/bhumio", {
+mongoose.connect(process.env.MONGODB, {
     useNewUrlParser: true
 }).then(() => app.listen(PORT, () => {
     console.log(`PORT ${PORT} Live`, '🚀')

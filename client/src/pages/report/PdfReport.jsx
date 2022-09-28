@@ -12,9 +12,11 @@ const PdfReport = () => {
     }
 
     const createAndDownloadPdf = async () => {
-        // await axiosInstance.get('/create-pdf');
+        await axiosInstance.get('/create-pdf');
         const res = await axiosInstance.get('/fetch-pdf', { responseType: 'blob' })
+        console.log('response type blob ', res);
         const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
+        console.log('blob constructor response ', pdfBlob);
         saveAs(pdfBlob, 'report.pdf');
     }
 
@@ -41,10 +43,10 @@ const PdfReport = () => {
                             <th>Budget (in ₹ Crore)</th>
                         </tr>
                     </thead>
-                    <hr/>
+                    <hr />
                     {
                         details.map((detail) => {
-                            return  <tbody>
+                            return <tbody>
                                 <tr>
                                     <td>{detail.projectId}</td>
                                     <td>{detail.projectName}</td>

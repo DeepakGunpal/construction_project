@@ -1,7 +1,7 @@
 const project = require("../model/project.js");
 const projectId = require("../model/projectId.js");
-const puppeteer = require("puppeteer");
 const fs = require("fs-extra");
+const pdf = require('html-pdf');
 const hbs = require("handlebars");
 const path = require('path');
 
@@ -110,24 +110,21 @@ const compile = async (templateName, details) => {
 //todo createPdf and store on the server
 const createPDF = async (req, res) => {
     try {
-
         const projects = await project.find().select('projectId projectName budget');
         const details = JSON.parse(JSON.stringify(projects)); //todo deep copy (handlebars error resolved)
 
-        const browser = await puppeteer.launch({ ignoreDefaultArgs: ['--disable-extensions'] });
-        const page = await browser.newPage();
-
         const content = await compile('index', { details });
-
-        await page.setContent(content);
-        await page.pdf({
-            path: './src/pdf/allProjectBudgetReport.pdf',
-            format: 'A4'
+        pdf.create(content, {}).toFile(`${process.cwd()}/public/pdf/allProjectBudgetReport.pdf`, (err) => {
+            if (err) {
+                Promise.reject('pdf generation failed').catch((error) => res.send({ message: error }))
+            } else {
+                Promise.resolve('pdf generated')
+                    .then(() =>
+                        res.send({ message: 'pdf generated' })
+                    )
+            }
         });
 
-        console.log('pdf generated');
-
-        res.status(200).send({ data: details });
     } catch (error) {
         console.log(error);
         res.status(400).send({ message: error.message });
@@ -137,7 +134,7 @@ const createPDF = async (req, res) => {
 //todo fetchpdf
 const fetchPDF = async (req, res) => {
     try {
-        res.sendFile(`${process.cwd()}/src/pdf/allProjectBudgetReport.pdf`)
+        res.sendFile(`${process.cwd()}/public/pdf/allProjectBudgetReport.pdf`)
     } catch (error) {
         console.log("getpdf", error);
         res.status(400).send({ message: error.message });

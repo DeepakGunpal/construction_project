@@ -116,7 +116,7 @@ const createPDF = async (req, res) => {
         const content = await compile('index', { details });
         pdf.create(content, {}).toFile(`${process.cwd()}/public/pdf/allProjectBudgetReport.pdf`, (err) => {
             if (err) {
-                Promise.reject('pdf generation failed').catch((error) => res.send({ message: error }))
+                Promise.reject(err).catch((error) => res.send({ message: error }))
             } else {
                 Promise.resolve('pdf generated')
                     .then(() =>

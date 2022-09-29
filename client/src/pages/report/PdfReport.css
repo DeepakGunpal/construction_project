@@ -4,13 +4,15 @@
     flex-direction: column;
     text-align: center;
     width: 86%;
-    height: 90vh;
+    height: 92vh;
     border: 2px solid black;
     border-radius: 15px;
     margin: 2%;
     margin-left: 6%;
     background-color: black;
     color: white;
+    overflow-y: scroll;
+    scrollbar-width: thin;
 }
 
 table{

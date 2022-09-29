@@ -33,7 +33,6 @@ export default function AddProject() {
 
   const newProject = async (data) => {
     const res = await axiosInstance.post('/createProject', data).catch((err) => {
-      console.log(Object.values(err.response.data.message)[0])
       window.alert(Object.values(err.response.data.message)[0])
     })
     if (res.status === 201) window.alert("Project Created")
@@ -41,7 +40,6 @@ export default function AddProject() {
 
   const handleAdd = () => {
     const newProjectData = { ...newProjectDetails }
-    console.log('handleAdd', newProjectData);
     newProject(newProjectData);
     setNewProjectDetails("");
     setOpen(false);

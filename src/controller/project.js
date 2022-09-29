@@ -126,7 +126,6 @@ const createPDF = async (req, res) => {
         });
 
     } catch (error) {
-        console.log(error);
         res.status(400).send({ message: error.message });
     }
 }
@@ -136,7 +135,6 @@ const fetchPDF = async (req, res) => {
     try {
         res.sendFile(`${process.cwd()}/public/pdf/allProjectBudgetReport.pdf`)
     } catch (error) {
-        console.log("getpdf", error);
         res.status(400).send({ message: error.message });
     }
 }

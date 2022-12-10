@@ -1,0 +1,55 @@
+
+.table_container{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 86%;
+    height: 92vh;
+    border: 2px solid black;
+    border-radius: 15px;
+    margin: 2%;
+    margin-left: 6%;
+    background-color: black;
+    color: white;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+}
+
+table{
+    width: 90%;
+    font-size: larger;  
+    font-weight: 450;
+    margin-left: 4%;
+}
+
+table thead tr{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+table tbody tr{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.pdf_button_container{
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 4% 1% 0;
+}
+
+.pdfButton{
+    position: sticky;
+    width: fit-content;
+    font-size: larger;
+    padding: 10px 25px;
+    border-radius: 6px;
+    background-color: rgb(252, 252, 252);
+    color: rgb(12, 12, 11);
+}
+
+.pdfButton:hover{
+    font-weight: bolder;
+}

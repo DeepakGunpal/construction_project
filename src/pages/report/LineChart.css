@@ -1,0 +1,23 @@
+
+.line_chart{
+    width: 85%;
+    margin-left: 7%;
+    margin-top: 3%;
+    background-color: black;
+    border-radius: 55px;
+    padding: 12px;
+}
+
+.nav_in_linechart{
+    margin-left: 1%;
+}
+
+
+/* ==========Media  Queries (small devices) =============*/
+
+@media screen and (max-width: 600px) {
+    .nav_in_linechart{
+        margin-left: 1%;
+    }
+}
+
